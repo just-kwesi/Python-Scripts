@@ -8,6 +8,8 @@ chrome_service = Service(chrome_driver_path)
 
 driver = webdriver.Chrome(service=chrome_service)
 
+driver = webdriver.Chrome()
+
 driver.get("https://www.amazon.com/")
 
 amazon_search = driver.find_element(By.ID, "twotabsearchtextbox")
