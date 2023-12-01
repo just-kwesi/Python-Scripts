@@ -15,12 +15,31 @@ X_EMAIL = os.environ.get("TWITTER_EMAIL")
 X_PASSWORD = os.environ.get("TWITTER_PASSWORD")
 
 
-print(f"{X_PASSWORD},{X_EMAIL}")
+
 # Optional - Keep the browser open (helps diagnose issues if the script crashes)
-# chrome_options = webdriver.ChromeOptions()
-# chrome_options.add_experimental_option('detach',True)
-#
-# driver = webdriver.Chrome(service=chrome_service,options=chrome_options)
-# driver.get("https://twitter.com/home")
-# sleep(2)
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_experimental_option('detach',True)
+
+
+class InternetSpeedTwitterBot:
+    def __init__(self,_down,_up):
+        self.driver = webdriver.Chrome(service=chrome_service,options=chrome_options)
+        self.down = _down
+        self.up = _up
+
+    def get_internet_speed(self):
+        self.driver.get("https://twitter.com/home")
+        sleep(2)
+
+    def tweet_at_provider(self):
+        print('tweeting')
+
+
+
+bot = InternetSpeedTwitterBot("up","down")
+bot.get_internet_speed()
+bot.tweet_at_provider()
+
+
+
 
