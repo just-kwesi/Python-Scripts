@@ -74,14 +74,19 @@ class InternetSpeedTwitterBot:
         sleep(2)
 
 
+    def cleanup(self):
+        self.driver.quit()
+
+
 
 
 
 
 bot = InternetSpeedTwitterBot(chrome_service,chrome_options)
-# bot.get_internet_speed()
-bot.tweet_at_provider()
 
+bot.get_internet_speed() # get internet speed
+bot.tweet_at_provider() # tweet speed response
+bot.cleanup() # close the chrome driver
 
 
 
