@@ -33,23 +33,27 @@ class InternetSpeedTwitterBot:
         self.driver.get("https://www.speedtest.net/")
         sleep(1)
 
-        # start_button = self.driver.find_element(By.CSS_SELECTOR,".start-button a")
-
-        start_button = self.driver.find_element(By.XPATH, '//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[1]/a/span[4]')
+        start_button = self.driver.find_element(By.CSS_SELECTOR,".start-button a")
         start_button.click()
 
-        sleep(20)
+        sleep(25)
+
+        self.down = self.driver.find_element(By.CSS_SELECTOR, ".result-data .download-speed").text
+        self.up = self.driver.find_element(By.CSS_SELECTOR, ".result-data .upload-speed").text
+        print(f"download speed = {self.down} upload speed={self.up}")
+
+
 
 
 
     def tweet_at_provider(self):
-        print('tweeting')
+        pass
 
 
 
 bot = InternetSpeedTwitterBot(chrome_service,chrome_options)
 bot.get_internet_speed()
-bot.tweet_at_provider()
+
 
 
 
