@@ -65,6 +65,15 @@ class InternetSpeedTwitterBot:
 
         sleep(3)
 
+        tweet = self.driver.find_element(By.XPATH, '//*[@id="react-root"]/div/div/div[2]/main/div/div/div/div[1]/div/div[3]/div/div[2]/div[1]/div/div/div/div[2]/div[1]/div/div/div/div/div/div/div/div/div/div/label/div[1]/div/div/div/div/div/div[2]/div/div/div/div')
+        tweet.send_keys(f"Hey Spectrum Provider, why is my internet speed {self.down}down/{self.up}up when i pay for 300down/150up")
+
+        post = self.driver.find_element(By.XPATH,'//*[@id="react-root"]/div/div/div[2]/main/div/div/div/div[1]/div/div[3]/div/div[2]/div[1]/div/div/div/div[2]/div[2]/div[2]/div/div/div/div[3]/div/span/span')
+        post.click()
+
+        sleep(2)
+
+
 
 
 
