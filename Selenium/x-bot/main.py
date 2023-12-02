@@ -36,23 +36,42 @@ class InternetSpeedTwitterBot:
         start_button = self.driver.find_element(By.CSS_SELECTOR,".start-button a")
         start_button.click()
 
-        sleep(25)
+        sleep(45)
 
         self.down = self.driver.find_element(By.CSS_SELECTOR, ".result-data .download-speed").text
         self.up = self.driver.find_element(By.CSS_SELECTOR, ".result-data .upload-speed").text
-        print(f"download speed = {self.down} upload speed={self.up}")
-
-
-
+        # print(f"download speed = {self.down} upload speed={self.up}")
 
 
     def tweet_at_provider(self):
-        pass
+        self.driver.get("https://twitter.com/home")
+        sleep(2)
+
+        email_input = self.driver.find_element(By.XPATH,'//*[@id="layers"]/div/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div/div/div/div[5]/label/div/div[2]/div/input')
+        email_input.send_keys(X_EMAIL)
+        email_input.send_keys(Keys.ENTER)
+        sleep(2)
+
+        suspicios_activity = self.driver.find_element(By.XPATH,'//*[@id="layers"]/div/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[1]/div/div[2]/label/div/div[2]/div/input')
+        suspicios_activity.send_keys("python_bot_101")
+        suspicios_activity.send_keys(Keys.ENTER)
+        sleep(2)
+
+        # password_input = self.driver.find_element(By.XPATH,value='//*[@id="react-root"]/div/div/div/main/div/div/div/div[2]/div[2]/div[1]/div/div/div/div[3]/div/label/div/div[2]/div[1]/input')
+        password_input = self.driver.find_element(By.XPATH,'//*[@id="layers"]/div/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[1]/div/div/div[3]/div/label/div/div[2]/div[1]/input')
+
+        password_input.send_keys(X_PASSWORD)
+        password_input.send_keys(Keys.ENTER)
+
+        sleep(3)
+
+
 
 
 
 bot = InternetSpeedTwitterBot(chrome_service,chrome_options)
-bot.get_internet_speed()
+# bot.get_internet_speed()
+bot.tweet_at_provider()
 
 
 
