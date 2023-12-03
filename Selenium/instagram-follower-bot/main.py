@@ -25,5 +25,16 @@ driver = webdriver.Chrome(service=chrome_service,options=chrome_options)
 driver.get("https://www.instagram.com/")
 sleep(3)
 
+username_input = driver.find_element(By.XPATH,'//*[@id="loginForm"]/div/div[1]/div/label/input')
+username_input.send_keys(INSTAGRAM_EMAIL)
+sleep(1)
+
+password_input = driver.find_element(By.XPATH,'//*[@id="loginForm"]/div/div[2]/div/label/input')
+password_input.send_keys(INSTAGRAM_PASSWORD)
+password_input.send_keys(Keys.ENTER)
+sleep(3)
+
+search_button = dr
+
 
 
