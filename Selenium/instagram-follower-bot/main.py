@@ -4,6 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.common.exceptions import ElementClickInterceptedException
 
 import os
 load_dotenv()
@@ -22,19 +23,6 @@ chrome_options = webdriver.ChromeOptions()
 chrome_options.add_experimental_option('detach',True)
 
 driver = webdriver.Chrome(service=chrome_service,options=chrome_options)
-
-
-# search_button = driver.find_element(By.XPATH,'//*[@id="mount_0_0_l3"]/div/div/div[2]/div/div/div[1]/div[1]/div[1]/div/div/div/div/div[2]/div[2]/span/div/a/div/div[1]/div/div/svg')
-# search_button.click()
-# sleep(1)
-#
-# search_bar = driver.find_element(By.XPATH,'//*[@id="mount_0_0_gi"]/div/div/div[2]/div/div/div[1]/div[1]/div[1]/div/div/div[2]/div/div/div[2]/div[1]/div/input')
-# search_bar.send_keys(account)
-# sleep(2)
-#
-# first_result = driver.find_element(By.XPATH,'//*[@id="mount_0_0_gi"]/div/div/div[2]/div/div/div[1]/div[1]/div[1]/div/div/div[2]/div/div/div[2]/div[2]/div/div[1]/a/div/div/div/div[2]/div/div/div/span')
-# first_result.click()
-# sleep(3)
 
 
 class InstaFollower:
@@ -71,10 +59,24 @@ class InstaFollower:
             self.driver.execute_script("arguments[0].scrollTop = arguments[0].scrollHeight", modal)
             sleep(2)
 
+    def follow(self):
+        all_buttons = self.driver.find_element(by=By.CSS_SELECTOR, value="li button")
+        for button in all_buttons:
+            try:
+                button.click()
+                sleep(1)
+            except ElementClickInterceptedException:
+                cancel_button = self.driver.find_element(by=By.XPATH,
+                                                         value='/html/body/div[5]/div/div/div/div[3]/button[2]')
+                cancel_button.click()
+
+        self.driver.quit()
+
 
 insta_bot = InstaFollower()
 insta_bot.login()
 insta_bot.find_follower()
+insta_bot.follow()
 
 
 
