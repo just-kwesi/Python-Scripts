@@ -60,7 +60,7 @@ class InstaFollower:
             sleep(2)
 
     def follow(self):
-        all_buttons = self.driver.find_element(by=By.CSS_SELECTOR, value="li button")
+        all_buttons = self.driver.find_elements(by=By.CSS_SELECTOR, value="._acas")
         for button in all_buttons:
             try:
                 button.click()
