@@ -20,12 +20,14 @@ class ZillowBot:
 
         listings = soup.find(name="ul",class_="List-c11n-8-84-3-photo-cards").find_all("li")
 
-        # listings_details=[]
+        listings_details=[]
         # for listing in listings:
-        #     address =
+        #     listing_address = listing.find('address').getText().strip()
+        #     listing_url = listing.find('a').get('href')
+        #     listing_price =
 
-
-        pprint(listings[0].getText())
+        text = listings[0].find('span',attrs={'data-test': 'property-card-price'}).getText().strip()
+        print(text)
 
 
 #instantiate class and call methods to get details
