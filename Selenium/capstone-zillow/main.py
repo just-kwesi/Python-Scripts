@@ -29,6 +29,7 @@ class ZillowBot:
         self.listing_details=[]
 
     def getListingDetails(self):
+        print("Getting listing details from zillow")
         response = requests.get(self.zillow_url)
         soup = BeautifulSoup(response.text, "lxml")
 
@@ -45,6 +46,7 @@ class ZillowBot:
             self.listing_details.append([listing_address,listing_url,listing_price_cleaned])
 
     def writeDetailsToForm(self):
+        print(f"writing the listing details to the google forms. No of listing: {len(self.listing_details)}")
         self.driver.get(self.forms_url)
         sleep(2)
 
