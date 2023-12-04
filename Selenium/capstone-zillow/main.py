@@ -18,16 +18,20 @@ class ZillowBot:
         response = requests.get(self.zillow_url)
         soup = BeautifulSoup(response.text, "lxml")
 
-        listings = soup.find(name="ul",class_="List-c11n-8-84-3-photo-cards").find_all("li")
+        #get lisings ul and li from that
+        listings_ul = soup.find(name="ul",class_="List-c11n-8-84-3-photo-cards")
+        listings_li = listings_ul.find_all(name="li",class_="ListItem-c11n-8-84-3-StyledListCardWrapper")
 
+        #loop to get details from list
         listings_details=[]
-        # for listing in listings:
-        #     listing_address = listing.find('address').getText().strip()
-        #     listing_url = listing.find('a').get('href')
-        #     listing_price =
+        for listing in listings_li:
+            listing_address = listing.find('address').text.strip()
+            listing_url = listing.find('a').get('href')
+            listing_price = listing.find('span',attrs={'data-test': 'property-card-price'}).getText().strip()
+            listing_price_cleaned = listing_price[:6]
+            listings_details.append([listing_address,listing_url,listing_price_cleaned])
 
-        text = listings[0].find('span',attrs={'data-test': 'property-card-price'}).getText().strip()
-        print(text)
+        pprint(listings_details)
 
 
 #instantiate class and call methods to get details
